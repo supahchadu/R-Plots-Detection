@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#group\nlibrary(ggplot2)\nlibrary(reshape)\n\nlibrary(ggplot2) #for ggplot use plotting\nlibrary(reshape) #for combining multiple variables\nraw<-read.csv(\"separationexperiment.csv\", sep=\",\") #Reads the data in each comma\nmt<- melt(raw,id=\"separationLength\") #Formats the data frame to rely on Person as Y axis\n\n# for switching the order of variables present in the plot\n#mz$Speed<-factor(mz$Person, levels=c(\"Experiment Group\",\"Control Group\"))\n# pass in our Data Frame var mm and feed which data to graph\np<- ggplot(mt, aes(x=separationLength,y=value, colour=variable, shape=variable)) \np<- p + geom_line(linetype=2) + geom_point(size = 4)\np<- p + scale_colour_discrete(labels=c(\"Low Priority\", \"High Priority\")) +\n        scale_shape_discrete(labels=c(\"Low Priority\", \"High Priority\"))\np<- p + labs(title=\"\")\np<- p + xlab(\"Separation Train Length\")\np<- p + ylab(\"Aggregate Loss Rate (%)\")\n#p<- p + theme(panel.border=element_blank(),panel.grid.major=element_blank(),axis.line.x = element_line(color = \"black\"), axis.line.y = element_line(color=\"black\"), text=element_text(size=25, family = \"Times\"))\np<- p + theme_bw() + theme(legend.title=element_blank(), legend.background=element_rect(color = \"black\"), axis.text.x = element_text(face = \"bold\", margin = margin(0,0,0,0)), axis.title.y=element_text(margin = margin(0,30,0,0)))\np <- p + theme(axis.line.x = element_line(color = \"black\"), axis.line.y = element_line(color=\"black\"), text=element_text(size=25, family = \"Helvetica\"),axis.title.x=element_text(margin = margin(30,0,0,0)))\np<- p + scale_y_continuous(limit=c(0,100), expand = c(0,0), breaks=seq(20,100,20))\np <- p + coord_cartesian(xlimit=c(0,100))\np <- p + scale_x_continuous(breaks=seq(0,10,1), expand=c(0,0))\n#p <- p + geom_vline(xintercept = 50, linetype=\"dashed\", colour=\"orange\") +\n     #geom_text(aes(x=50, label=\"Low Separation Length\\n\",y=60,family=\"Helvetica\",fontface=\"plain\"), colour=\"red\",angle=90,size=4) +\n     #geom_text(aes(x =50, label=\"\\nHigher Separation Length\", y=60,family=\"Helvetica\",fontface=\"plain\"), colour=\"blue\",angle=90,size=4)\np\nggsave(filename = \"separationExperiment.pdf\", plot = last_plot(), width=297,height=210,units=\"mm\")",
+    "created" : 1472439093657.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1214654132",
+    "id" : "7133EA73",
+    "lastKnownWriteTime" : 1473035178,
+    "last_content_update" : 1473035178464,
+    "path" : "~/test/separationTrainExperiment.R",
+    "project_path" : "separationTrainExperiment.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
